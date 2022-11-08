@@ -20,7 +20,6 @@
           "src": "/gettoken"
         }
       },
-      
       {
         "/mshook": {
           "method": "post",
@@ -36,7 +35,8 @@
           "ttl": "TTL"
         }
       }
-    ],
+    ]
+  },
   "scripts": {
     "start": "npx sandbox"
   },
