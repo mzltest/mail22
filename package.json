@@ -20,12 +20,7 @@
           "src": "/gettoken"
         }
       },
-      {
-        "/tg": {
-          "method": "post",
-          "src": "/tg-callback"
-        }
-      },
+      
       {
         "/mshook": {
           "method": "post",
