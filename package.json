@@ -43,7 +43,6 @@
       }
     ],
     "scheduled": {
-  
       "update_webhook": {
         "rate": [
           1,
