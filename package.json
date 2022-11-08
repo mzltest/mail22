@@ -37,14 +37,6 @@
         }
       }
     ],
-    "scheduled": {
-      "update_webhook": {
-        "rate": "rate(1 day)"
-,
-                "src": "/update_webhook"
-      }
-    }
-  },
   "scripts": {
     "start": "npx sandbox"
   },
