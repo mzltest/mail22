@@ -4,48 +4,32 @@
   "description": "Begin basic CRUD app",
   "arc": {
     "app": "crud-app",
-    "aws":{"timeout":300},
+    "aws": {
+      "timeout": 300
+    },
     "http": [
       {
-        "/init-upload": {
-          "method": "post",
-          "src": "/upload/init"
-        }
-      },
-      {
-        "/upload_preflight": {
-          "method": "post",
-          "src": "/upload/chunkcheck"
-        }
-      },
-      {
-        "/upload": {
-          "method": "post",
-          "src": "/upload/upload"
-        }
-      },
-      {
-        "/get-info": {
+        "/auth_request": {
           "method": "get",
-          "src": "/get/info"
+          "src": "/authreq"
         }
       },
       {
-        "/get-chunks": {
+        "/auth": {
           "method": "post",
-          "src": "/get/chunks"
+          "src": "/gettoken"
         }
       },
       {
-        "/surl/:key": {
-          "method": "get",
-          "src": "/shorturl/shrink"
+        "/tg": {
+          "method": "post",
+          "src": "/tg-callback"
         }
       },
       {
-        "/s/:code": {
-          "method": "get",
-          "src": "/shorturl/expand"
+        "/mshook": {
+          "method": "post",
+          "src": "/mswebhook"
         }
       }
     ],
@@ -57,7 +41,17 @@
           "ttl": "TTL"
         }
       }
-    ]
+    ],
+    "scheduled": {
+  
+      "update_webhook": {
+        "rate": [
+          1,
+          "day"
+        ],
+        "src": "/update_webhook"
+      }
+    }
   },
   "scripts": {
     "start": "npx sandbox"
@@ -66,6 +60,12 @@
     "@architect/functions": "^4.0.0",
     "@architect/sandbox": "^4.5.2",
     "@begin/data": "^3.0.0",
+    "dayjs": "^1.11.6",
+    "dotenv": "^16.0.3",
+    "escape-html": "^1.0.3",
+    "jsonwebtoken": "^8.5.1",
+    "node-fetch": "^2.6.7",
+    "node-telegram-bot-api": "^0.59.0",
     "tiny-json-http": "^7.3.0"
   }
 }
