@@ -99,8 +99,7 @@ exports.handler = async function create(req) {
       escape(res.sender.emailAddress.name+'<'+res.sender.emailAddress.address+'>')
       ,escape(res.subject),escape(res.bodyPreview))
       rkeyboard=[
-        [{'text':'Web端查看(官方)','url':res.webLink}],[{'text':'仅查看正文(免登录)','url':process.env.MAIL_READLINK+mymsgkey}],
-        [{'text':'查看信头(没什么用)','callback_data':mymsgkey+':'+'header'}]
+        [{'text':'Web端查看(官方)','url':res.webLink}],[{'text':'仅查看正文(免登录)','url':process.env.MAIL_READLINK+mymsgkey}]
       ]
       if(process.env.TEST_ID){chatid=process.env.TEST_ID}
      res=await tgbot.sendMessage(chatid,text,{parse_mode:'HTML',reply_markup:{inline_keyboard:rkeyboard}})
