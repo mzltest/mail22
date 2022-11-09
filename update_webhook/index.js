@@ -14,12 +14,13 @@ if (!users || !users.data){
 }
 for (elem of users.data){
     //[{res},...]
-    
-res=await data.get({'table':'users',key:todo.clientState})
+    if(!('clientState' in elem)){
+      continue
+    }
+res=await data.get({'table':'users',key:elem.clientState})
 if(!res){
-  return{
-    'err':'no such user :('
-  }
+console.log('no such user',res)
+continue
 }  
 if(dayjs(elem.expirationDateTime).unix()>((Date.now()/1000)+(60*60*12))){
     continue

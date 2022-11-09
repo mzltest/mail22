@@ -51,7 +51,7 @@ async function reftoken(refresh_token){
 
 exports.handler = async function create(req) {
   console.log(req)
-  if('validationToken' in req.queryStringParameters){
+  if( 'queryStringParameters' in req &&'validationToken' in req.queryStringParameters){
     return   {statusCode: 200,
     headers: { 'content-type': 'text/plain' },
     body:req.queryStringParameters.validationToken}
