@@ -54,7 +54,7 @@ exports.handler = async function create(req) {
   if('validationToken' in req.queryStringParameters){
     return   {statusCode: 200,
     headers: { 'content-type': 'text/plain; charset=utf8' },
-    body:req.queryStringParameters.validationToken}
+    body:encodeURIComponent(req.queryStringParameters.validationToken)}
   }
   let todo = arc.http.helpers.bodyParser(req)
   console.log(todo)
