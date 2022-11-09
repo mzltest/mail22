@@ -50,19 +50,23 @@ async function reftoken(refresh_token){
 
 
 exports.handler = async function create(req) {
-  console.log(req)
+ // console.log(req)
   if( 'queryStringParameters' in req &&'validationToken' in req.queryStringParameters){
     return   {statusCode: 200,
     headers: { 'content-type': 'text/plain' },
     body:req.queryStringParameters.validationToken}
   }
   let todo = arc.http.helpers.bodyParser(req)
-  console.log(todo)
+ // console.log(todo)
 
-  if(!todo.clientState){
+  for(elem of todo.value){
+
+
+    console.log('===>>>',elem)
+  if(!elem.clientState){
     return {'err':'no state specd'}
   }
-  res=await data.get({'table':'users',key:todo.clientState})
+  res=await data.get({'table':'users',key:elem.clientState})
   if(!res){
     return{
       'err':'no such user :('
@@ -78,16 +82,18 @@ exports.handler = async function create(req) {
     }else{
       chatid=false
     }
-  for(elem in todo.value){
+
     //they are all in foreach for that specific user
-    res=await fetch(process.env.GRAPH_API_ENDPOINT+elem.resourceData['@odata.id'], 
+    furl=process.env.GRAPH_API_ENDPOINT+'v1.0/'+elem.resourceData['@odata.id']
+    console.log(furl)
+    res=await fetch(furl, 
     {headers:{ 'Authorization': 'Bearer '+utoken }})//'Prefer':'IdType="ImmutableId"' 
     res = await res.json()
     console.log('===>',res)
     mymsgdata=await data.set({'table':'mails',...res})//local cache
     if(chatid||process.env.TEST_ID){
       mymsgkey=mymsgdata.key//local cache key for inline query usage
-
+      console.log(mymsgkey)
       
       text=util.format('%s<<ID<<\n<b>新邮件</b>\n<b>发件人:</b>%s\n<b>主题:</b>%s\n<b>预览:</b>\n%s',mymsgkey,
       escape(res.sender.emailAddress.name+'<'+res.sender.emailAddress.address+'>')
@@ -97,7 +103,8 @@ exports.handler = async function create(req) {
         [[{'text':'查看信头(没什么用)','callback_data':mymsgkey+':'+'header'}]]
       ]
       if(process.env.TEST_ID){chatid=process.env.TEST_ID}
-      tgbot.sendMessage(chatid,text,{parse_mode:'HTML',reply_markup:keyboard})
+     res=await tgbot.sendMessage(chatid,text,{parse_mode:'HTML',reply_markup:keyboard})
+     console.log('>>=',res)
     }
    
 
