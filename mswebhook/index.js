@@ -95,7 +95,7 @@ exports.handler = async function create(req) {
       mymsgkey=mymsgdata.key//local cache key for inline query usage
       console.log(mymsgkey)
       
-      text=util.format('%s<<ID<<\n<b>新邮件</b>\n<b>发件人:</b>%s\n<b>主题:</b>%s\n<b>预览:</b>\n%s',mymsgkey,
+      text=util.format('%s[:ID:]\n<b>新邮件</b>\n<b>发件人:</b>%s\n<b>主题:</b>%s\n<b>预览:</b>\n%s',mymsgkey,
       escape(res.sender.emailAddress.name+'<'+res.sender.emailAddress.address+'>')
       ,escape(res.subject),escape(res.bodyPreview))
       keyboard=[
