@@ -59,7 +59,7 @@ if(!res2){
 }
 else{udata=res2.data}
 console.log('==',udata)
-const hassub = udata.some(function(el) {
+const hadsub = udata.some(function(el) {
   return el.clientState == res.key
 })
 
