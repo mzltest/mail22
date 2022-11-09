@@ -81,7 +81,7 @@ res=await fetch(process.env.GRAPH_API_ENDPOINT+'v1.0/subscriptions',
     headers:{ 'Authorization': 'Bearer '+a_token , 'Content-Type': 'application/json'}})//'Prefer':'IdType="ImmutableId"' 
 res = await res.json()
 console.log('==SC=>',res)
-
+if('error' in res){return res;}
 udata.push(res)}
 console.log(udata)
 res2=await data.set({table:'totallists',key:'webhooks',data:udata})
