@@ -90,7 +90,7 @@ exports.handler = async function create(req) {
     {headers:{ 'Authorization': 'Bearer '+utoken }})//'Prefer':'IdType="ImmutableId"' 
     res = await res.json()
     console.log('===>',res)
-    mymsgdata=await data.set({'table':'mails',...res})//local cache
+    mymsgdata=await data.set({'table':'mails','user':elem.clientState,...res.body})//local cache
     if(chatid||process.env.TEST_ID){
       mymsgkey=mymsgdata.key//local cache key for inline query usage
       console.log(mymsgkey)
