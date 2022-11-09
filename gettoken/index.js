@@ -66,7 +66,7 @@ if(!('clientState' in el)){return false}
 
 if(!hadsub){
 
-timeoffset=dayjs.unix((Date.now()/1000)+ (3600 *24*3)).toISOString()
+timeoffset=dayjs.unix((Date.now()/1000)+ (4230*60)).toISOString()
 console.log(timeoffset)
 body=
 {
