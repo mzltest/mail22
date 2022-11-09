@@ -52,7 +52,9 @@ async function reftoken(refresh_token){
 exports.handler = async function create(req) {
   let todo = arc.http.helpers.bodyParser(req)
   if('validationToken' in req.queryStringParameters){
-    return {text:req.queryStringParameters.validationToken}
+    return   {statusCode: 200,
+    headers: { 'content-type': 'text/plain; charset=utf8' },
+    body:req.queryStringParameters.validationToken}
   }
   if(!todo.clientState){
     return {'err':'no state specd'}
@@ -97,5 +99,5 @@ exports.handler = async function create(req) {
    
 
   }
-  return {'ok':true}
+  return {statusCode: 202,body:{'ok':true}}
 }
