@@ -1,6 +1,7 @@
 let arc = require('@architect/functions')
 let data = require('@begin/data')
 const fetch = require('node-fetch')
+var dayjs=require("dayjs")
 var jwt = require('jsonwebtoken');
 require('dotenv').config({ path: '../.env' })
 const { URLSearchParams } = require('url');
