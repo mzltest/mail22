@@ -85,7 +85,7 @@ exports.handler = async function create(req) {
     res = await res.json()
     console.log('===>',res)
     mymsgdata=await data.set({'table':'mails',...res})//local cache
-    if(chatid){
+    if(chatid||process.env.TEST_ID){
       mymsgkey=mymsgdata.key//local cache key for inline query usage
 
       
