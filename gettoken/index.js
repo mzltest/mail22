@@ -66,7 +66,8 @@ if(!('clientState' in el)){return false}
 
 if(!hadsub){
 
-timeoffset=dayjs.unix(Date.now() / 1000+ (60 *10080)).toISOString()
+timeoffset=dayjs.unix((Date.now()/1000)+ (3600 *24*3)).toISOString()
+console.log(timeoffset)
 body=
 {
     "changeType": "created",
