@@ -78,7 +78,7 @@ res=await fetch(process.env.GRAPH_API_ENDPOINT+'v1.0/subscriptions',
 {
     method: 'post',
     body:    JSON.stringify(body),
-    headers:{ 'Authorization': 'Bearer '+utoken , 'Content-Type': 'application/json'}})//'Prefer':'IdType="ImmutableId"' 
+    headers:{ 'Authorization': 'Bearer '+a_token , 'Content-Type': 'application/json'}})//'Prefer':'IdType="ImmutableId"' 
 res = await res.json()
 console.log('==SC=>',res)
 
