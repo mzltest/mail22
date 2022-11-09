@@ -3,7 +3,7 @@ let data = require('@begin/data')
 const fetch = require('node-fetch')
 var jwt = require('jsonwebtoken');
 require('dotenv').config({ path: '../.env' })
-let reftoken=require('reftok.js')
+let reftoken=require('./reftok.js')
 const { URLSearchParams } = require('url');
 const TelegramBot = require('node-telegram-bot-api');
 var escape = require('escape-html');
