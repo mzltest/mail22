@@ -25,6 +25,7 @@ async function reftoken(refresh_token){
     
     res=await fetch('https://login.microsoftonline.com/'+process.env.TENANT_ID+'/oauth2/v2.0/token', { method: 'POST', body: params })
     res=await res.json()
+    console.log(res)
     uid=jwt.decode(res.id_token).sub
     console.log(uid)
     a_token=res.access_token
@@ -73,7 +74,7 @@ exports.handler = async function create(req) {
     }
   }
   if(Date.now()/1000>=res.expiry){
-    utoken= await reftoken()
+    utoken= await reftoken(res.r_token)
   }else{
     utoken=res.a_token
   }
