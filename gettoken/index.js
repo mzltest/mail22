@@ -52,8 +52,20 @@ exports.handler = async function create(req) {
 
   //mail hook
 
+//update webhooks lists
+res2=await data.get({table:'totallists',key:'webhooks'})
+if(!res2){
+  udata=new Array()
+}
+else{udata=res2.data}
+console.log('==',udata)
+const hassub = udata.some(function(el) {
+  return el.clientState == res.key
+})
 
-timeoffset=dayjs.unix(Date.now() / 1000) + (60 * 60 * 24 * 3).toISOString()
+if(!hadsub){
+
+timeoffset=dayjs.unix(Date.now() / 1000+ (60 * 60 * 24 * 3)).toISOString()
 body=
 {
     "changeType": "created",
@@ -69,18 +81,10 @@ res=await fetch(process.env.GRAPH_API_ENDPOINT+'v1.0/subscriptions',
     headers:{ 'Authorization': 'Bearer '+utoken , 'Content-Type': 'application/json'}})//'Prefer':'IdType="ImmutableId"' 
 res = await res.json()
 console.log('==SC=>',res)
-//update webhooks lists
-res2=await data.get({table:'totallists',key:'webhooks'})
-if(!res2){
-  udata=new Array()
-}
-else{udata=res2.data}
-console.log('==',udata)
-if(!udata.includes(res)){
 
 udata.push(res)}
 console.log(udata)
-res2=await data.set({table:'totallists',key:'users',data:udata})
+res2=await data.set({table:'totallists',key:'webhooks',data:udata})
 console.log(res2)
 
 
